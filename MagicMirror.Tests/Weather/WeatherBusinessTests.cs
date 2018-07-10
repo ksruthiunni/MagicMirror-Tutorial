@@ -1,5 +1,6 @@
 ﻿using MagicMirror.Business.Services;
 using MagicMirror.DataAccess.Entities.Weather;
+using MagicMirror.DataAccess.Repos;
 using Moq;
 using System;
 using Xunit;
@@ -8,7 +9,8 @@ namespace MagicMirror.Tests.Weather
 {
     public class WeatherBusinessTests
     {
-        private Mock<IWeatherService> mockService;
+        private Mock<IWeatherRepo> mockRepo;
+        private Mock<WeatherService> mockService;
         private Mock<WeatherEntity> mockEntity;
 
         private string location = "London";
@@ -19,8 +21,10 @@ namespace MagicMirror.Tests.Weather
 
         public WeatherBusinessTests()
         {
-            mockService = new Mock<IWeatherService>();
+            mockRepo = new Mock<IWeatherRepo>();
             mockEntity = new Mock<WeatherEntity>();
+
+            mockService = new Mock<WeatherService>(mockRepo.Object);
         }
 
         [Fact]
@@ -29,9 +33,14 @@ namespace MagicMirror.Tests.Weather
             // Arrange
             mockEntity.Setup(x => x.Name).Returns(location);
             mockEntity.Setup(x => x.Main.Temp).Returns(fahrenheit);
-            mockEntity.Setup(x => x.Weather[0].Main).Returns(weathertype);
-            mockEntity.Setup(x => x.Sys.Sunrise).Returns(sunrise);
-            mockEntity.Setup(x => x.Sys.Sunset).Returns(sunset);
+            //mockEntity.Setup(x => x.Weather).Returns()
+
+
+            mockEntity.Setup(x => x.Sys).Returns(new Sys
+            {
+                Sunrise = sunrise,
+                Sunset = sunset
+            });
 
             // Act
             var model = mockService.Object.MapFromEntity(mockEntity.Object);
@@ -41,13 +50,6 @@ namespace MagicMirror.Tests.Weather
             Assert.Equal(fahrenheit, model.Temperature);
             Assert.Equal(sunrise.ToString(), model.Sunrise);
             Assert.Equal(sunset.ToString(), model.Sunset);
-            Assert.Equal(weathertype, model.WeatherType);
-        }
-
-        [Fact]
-        public void WhyAmISoStressed()
-        {
-            var model = mockService.Object.MapFromEntity(It.IsAny<WeatherEntity>());
         }
     }
 }

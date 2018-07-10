@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\MagicMirror.DataAccess.Entities\MagicMirror.DataAccess.Entities.csproj" />
+    <ProjectReference Include="..\MagicMirror.DataAccess\MagicMirror.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

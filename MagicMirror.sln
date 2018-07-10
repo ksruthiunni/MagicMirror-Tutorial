@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicMirror.DataAccess.Enti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicMirror.Tests", "MagicMirror.Tests\MagicMirror.Tests.csproj", "{C72D8EE3-6E53-4F9F-8FA7-E6BA10DBD1E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMirror.Business", "MagicMirror.Business\MagicMirror.Business.csproj", "{40C3C870-3832-40A6-9956-07B8EAD59739}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMirror.Business", "MagicMirror.Business\MagicMirror.Business.csproj", "{B6956124-1021-4532-8AE2-20497F126D86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{C72D8EE3-6E53-4F9F-8FA7-E6BA10DBD1E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C72D8EE3-6E53-4F9F-8FA7-E6BA10DBD1E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C72D8EE3-6E53-4F9F-8FA7-E6BA10DBD1E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40C3C870-3832-40A6-9956-07B8EAD59739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40C3C870-3832-40A6-9956-07B8EAD59739}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40C3C870-3832-40A6-9956-07B8EAD59739}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40C3C870-3832-40A6-9956-07B8EAD59739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6956124-1021-4532-8AE2-20497F126D86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6956124-1021-4532-8AE2-20497F126D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6956124-1021-4532-8AE2-20497F126D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6956124-1021-4532-8AE2-20497F126D86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

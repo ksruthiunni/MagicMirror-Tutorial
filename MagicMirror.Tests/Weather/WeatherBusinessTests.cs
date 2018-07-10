@@ -1,55 +1,73 @@
-﻿using MagicMirror.Business.Services;
+﻿using MagicMirror.Business.Models;
+using MagicMirror.Business.Services;
 using MagicMirror.DataAccess.Entities.Weather;
 using MagicMirror.DataAccess.Repos;
 using Moq;
-using System;
 using Xunit;
 
 namespace MagicMirror.Tests.Weather
 {
     public class WeatherBusinessTests
     {
-        private Mock<IWeatherRepo> mockRepo;
-        private Mock<WeatherService> mockService;
-        private Mock<WeatherEntity> mockEntity;
+        private readonly Mock<WeatherService> _mockService;
+        private readonly Mock<WeatherEntity> _mockEntity;
 
-        private string location = "London";
-        private float fahrenheit = 280.4f;
-        private string weathertype = "Cloudy";
-        private int sunrise = 1531194962;
-        private int sunset = 1531253720;
+        private const string Location = "London";
+        private const float Kelvin = 280.4f;
+        private const string Weathertype = "Cloudy";
+        private const int Sunrise = 1531194962;
+        private const int Sunset = 1531253720;
 
         public WeatherBusinessTests()
         {
-            mockRepo = new Mock<IWeatherRepo>();
-            mockEntity = new Mock<WeatherEntity>();
+            _mockEntity = new Mock<WeatherEntity>();
 
-            mockService = new Mock<WeatherService>(mockRepo.Object);
+            var mockRepo = new Mock<IWeatherRepo>();
+            _mockService = new Mock<WeatherService>(mockRepo.Object);
         }
 
         [Fact]
         public void Can_Map_From_Entity()
         {
             // Arrange
-            mockEntity.Setup(x => x.Name).Returns(location);
-            mockEntity.Setup(x => x.Main.Temp).Returns(fahrenheit);
-            //mockEntity.Setup(x => x.Weather).Returns()
+            _mockEntity.Setup(x => x.Name).Returns(Location);
+            _mockEntity.Setup(x => x.Main.Temp).Returns(Kelvin);
 
-
-            mockEntity.Setup(x => x.Sys).Returns(new Sys
+            _mockEntity.Setup(x => x.Weather).Returns(() => new[]
             {
-                Sunrise = sunrise,
-                Sunset = sunset
+                new DataAccess.Entities.Weather.Weather
+                {
+                    Main = Weathertype
+                }
+            });
+
+            _mockEntity.Setup(x => x.Sys).Returns(new Sys
+            {
+                Sunrise = Sunrise,
+                Sunset = Sunset
             });
 
             // Act
-            var model = mockService.Object.MapFromEntity(mockEntity.Object);
+            var model = _mockService.Object.MapFromEntity(_mockEntity.Object);
 
             // Assert
-            Assert.Equal(location, model.Location);
-            Assert.Equal(fahrenheit, model.Temperature);
-            Assert.Equal(sunrise.ToString(), model.Sunrise);
-            Assert.Equal(sunset.ToString(), model.Sunset);
+            Assert.Equal(Location, model.Location);
+            Assert.Equal(Weathertype, model.WeatherType);
+            Assert.Equal(Kelvin, model.Temperature);
+            Assert.Equal(Sunrise.ToString(), model.Sunrise);
+            Assert.Equal(Sunset.ToString(), model.Sunset);
         }
-    }
+
+        [Fact]
+        public void Can_Calculate_Values()
+        {
+            // Arrange
+            var model = new Mock<WeatherModel>();
+            model.Setup(x => x.Sunset).Returns(Sunset.ToString());
+            model.Setup(x => x.Sunrise).Returns(Sunrise.ToString());
+            model.Setup(x => x.Temperature).Returns(Kelvin);
+
+            // Act
+            _mockService.Object.
+        }
 }

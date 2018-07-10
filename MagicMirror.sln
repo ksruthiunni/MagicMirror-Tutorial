@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicMirror.DataAccess.Enti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicMirror.Tests", "MagicMirror.Tests\MagicMirror.Tests.csproj", "{C72D8EE3-6E53-4F9F-8FA7-E6BA10DBD1E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicMirror.Business", "MagicMirror.Business\MagicMirror.Business.csproj", "{B6956124-1021-4532-8AE2-20497F126D86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicMirror.Business", "MagicMirror.Business\MagicMirror.Business.csproj", "{B6956124-1021-4532-8AE2-20497F126D86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Generic", "Acme.Generic\Acme.Generic.csproj", "{04332B91-68DA-4D68-BD2D-D87F28826D9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B6956124-1021-4532-8AE2-20497F126D86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6956124-1021-4532-8AE2-20497F126D86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6956124-1021-4532-8AE2-20497F126D86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04332B91-68DA-4D68-BD2D-D87F28826D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04332B91-68DA-4D68-BD2D-D87F28826D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04332B91-68DA-4D68-BD2D-D87F28826D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04332B91-68DA-4D68-BD2D-D87F28826D9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,6 +7,6 @@ namespace MagicMirror.Business.Services
     {
         WeatherModel MapFromEntity(WeatherEntity entity);
 
-        //WeatherModel CalculateValues(WeatherModel model);
+        WeatherModel CalculateValues(WeatherModel model);
     }
 }

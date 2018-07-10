@@ -14,7 +14,6 @@ namespace MagicMirror.Business.Configuration
                 .ForMember(x => x.Sunset, y => y.MapFrom(z => z.Sys.Sunset))
                 .ForMember(x => x.Temperature, y => y.MapFrom(z => z.Main.Temp))
                 .ForMember(x => x.WeatherType, y => y.MapFrom(z => z.Weather[0].Main));
-
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using MagicMirror.Business.Enums;
 
 namespace MagicMirror.Business.Models
 {
@@ -20,11 +21,5 @@ namespace MagicMirror.Business.Models
         {
             throw new NotImplementedException();
         }
-    }
-
-    public enum DistanceUom
-    {
-        Metric = 0,
-        Imperial = 1
     }
 }

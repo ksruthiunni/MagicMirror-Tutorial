@@ -1,5 +1,6 @@
 ﻿using Acme.Generic.Helpers;
 using System;
+using MagicMirror.Business.Enums;
 
 namespace MagicMirror.Business.Models
 {
@@ -19,12 +20,10 @@ namespace MagicMirror.Business.Models
 
         public TemperatureUom TemperatureUom { get; set; }
 
-        public override Model ConvertValues()
+        public override void ConvertValues()
         {
             ConvertTemperature(Temperature);
             ConvertDates();
-
-            return this;
         }
 
         private void ConvertDates()
@@ -60,11 +59,4 @@ namespace MagicMirror.Business.Models
             Temperature = convertedDegrees;
         }
     }
-}
-
-public enum TemperatureUom
-{
-    Kelvin = 0,
-    Fahrenheit = 1,
-    Celsius = 2
 }

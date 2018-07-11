@@ -2,6 +2,6 @@
 {
     public class Row
     {
-        public Element[] Elements { get; set; }
+        public Element [] Elements { get; set; }
     }
 }

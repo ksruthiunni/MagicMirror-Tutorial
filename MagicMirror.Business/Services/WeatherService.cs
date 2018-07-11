@@ -1,18 +1,17 @@
-﻿using Acme.Generic.Helpers;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.Configuration;
 using MagicMirror.Business.Configuration;
 using MagicMirror.Business.Models;
 using MagicMirror.DataAccess.Entities.Weather;
 using MagicMirror.DataAccess.Repos;
-using System;
+using System.Threading.Tasks;
 
 namespace MagicMirror.Business.Services
 {
     public class WeatherService : IWeatherService
     {
         private IWeatherRepo _repo;
-        private IMapper Mapper;
+        private IMapper _mapper;
 
         public WeatherService(IWeatherRepo repo)
         {
@@ -20,41 +19,24 @@ namespace MagicMirror.Business.Services
             SetUpMapperConfiguration();
         }
 
-        public WeatherModel CalculateValues(WeatherModel model)
+        public async Task<WeatherModel> GetWeatherModel()
         {
-            model.Temperature = ConvertTemperature(model.Temperature, TemperatureUom.Celsius);
+            var entity = await _repo.GetWeatherEntityByCityAsync("London");
+            var model = MapFromEntity(entity);
+            model.ConvertValues();
 
             return model;
-        }
-
-        private double ConvertTemperature(double degrees, TemperatureUom uom)
-        {
-            double convertedDegrees = -1;
-
-            switch (uom)
-            {
-                case TemperatureUom.Celsius:
-                    convertedDegrees = TemperatureHelper.KelvinToCelsius(degrees);
-                    break;
-
-                case TemperatureUom.Fahrenheit:
-                    convertedDegrees = TemperatureHelper.KelvinToCelsius(degrees);
-                    break;
-
-                case TemperatureUom.Kelvin:
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(uom), uom, null);
-            }
-
-            return convertedDegrees;
         }
 
         public WeatherModel MapFromEntity(WeatherEntity entity)
         {
-            var model = Mapper.Map<WeatherModel>(entity);
+            var model = _mapper.Map<WeatherModel>(entity);
             return model;
+        }
+
+        public WeatherModel CalculateValues(WeatherModel model)
+        {
+            return model.ConvertValues();
         }
 
         protected void SetUpMapperConfiguration()
@@ -62,7 +44,7 @@ namespace MagicMirror.Business.Services
             var baseMappings = new MapperConfigurationExpression();
             baseMappings.AddProfile<AutoMapperConfiguration>();
             var config = new MapperConfiguration(baseMappings);
-            Mapper = new Mapper(config);
+            _mapper = new Mapper(config);
         }
     }
 }

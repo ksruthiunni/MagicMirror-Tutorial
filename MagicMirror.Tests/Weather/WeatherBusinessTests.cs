@@ -62,12 +62,24 @@ namespace MagicMirror.Tests.Weather
         public void Can_Calculate_Values()
         {
             // Arrange
-            var model = new Mock<WeatherModel>();
-            model.Setup(x => x.Sunset).Returns(Sunset.ToString());
-            model.Setup(x => x.Sunrise).Returns(Sunrise.ToString());
-            model.Setup(x => x.Temperature).Returns(Kelvin);
+            var model = new WeatherModel()
+            {
+                Sunrise = "1531281435",
+                Sunset = "1531340063",
+                Temperature = 290.6,
+                Location = "London",
+                TemperatureUom = TemperatureUom.Celsius,
+                WeatherType = "Clear",
+                Icon = "01d"
+            };
 
             // Act
-            _mockService.Object.
+            _mockService.Object.CalculateValues(model);
+
+            // Assert
+            Assert.Equal(17.45, model.Temperature);
+            Assert.Equal("03:57", model.Sunrise);
+            Assert.Equal("20:14", model.Sunset);
         }
+    }
 }

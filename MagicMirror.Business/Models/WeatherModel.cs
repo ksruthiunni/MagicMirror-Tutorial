@@ -3,7 +3,7 @@ using Acme.Generic.Helpers;
 
 namespace MagicMirror.Business.Models
 {
-    public class WeatherModel : IWeatherModel
+    public class WeatherModel
     {
         public string Location { get; set; }
 

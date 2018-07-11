@@ -1,6 +1,7 @@
 ﻿namespace MagicMirror.Business.Models
 {
-    public class Model
+    public abstract class Model
     {
+        public abstract void ConvertValues();
     }
 }

@@ -11,7 +11,6 @@ namespace MagicMirror.Business.Services
         public WeatherService(IWeatherRepo repo)
         {
             _repo = repo;
-            SetUpMapperConfiguration();
         }
 
         public async Task<WeatherModel> GetWeatherModel(string city)
@@ -21,11 +20,6 @@ namespace MagicMirror.Business.Services
             model.ConvertValues();
 
             return model;
-        }
-
-        public WeatherModel ConvertValues(WeatherModel model)
-        {
-            return model.ConvertValues();
         }
     }
 }

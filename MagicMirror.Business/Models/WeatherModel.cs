@@ -19,7 +19,7 @@ namespace MagicMirror.Business.Models
 
         public TemperatureUom TemperatureUom { get; set; }
 
-        public WeatherModel ConvertValues()
+        public override Model ConvertValues()
         {
             ConvertTemperature(Temperature);
             ConvertDates();

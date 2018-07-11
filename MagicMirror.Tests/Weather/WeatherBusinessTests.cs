@@ -73,7 +73,7 @@ namespace MagicMirror.Tests.Weather
             };
 
             // Act
-            _mockService.Object.ConvertValues(model);
+            model.ConvertValues();
 
             // Assert
             Assert.Equal(17.45, model.Temperature);

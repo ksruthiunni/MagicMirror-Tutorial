@@ -1,5 +1,5 @@
-﻿using System;
-using Acme.Generic.Helpers;
+﻿using Acme.Generic.Helpers;
+using System;
 
 namespace MagicMirror.Business.Models
 {
@@ -37,7 +37,7 @@ namespace MagicMirror.Business.Models
 
         private void ConvertTemperature(double degrees)
         {
-            double convertedDegrees = -1;
+            double convertedDegrees;
 
             switch (TemperatureUom)
             {

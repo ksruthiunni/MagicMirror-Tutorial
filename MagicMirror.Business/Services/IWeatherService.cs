@@ -1,12 +1,11 @@
-﻿using System.Threading.Tasks;
-using MagicMirror.Business.Models;
-using MagicMirror.DataAccess.Entities.Weather;
+﻿using MagicMirror.Business.Models;
+using System.Threading.Tasks;
 
 namespace MagicMirror.Business.Services
 {
     public interface IWeatherService
     {
-        Task<WeatherModel> GetWeatherModel();
+        Task<WeatherModel> GetWeatherModel(string city);
 
         WeatherModel ConvertValues(WeatherModel model);
     }

@@ -2,9 +2,9 @@
 
 namespace MagicMirror.Business.Models
 {
-    public class TrafficModel: Model
+    public class TrafficModel : Model
     {
-        public string Start  { get; set; }
+        public string Start { get; set; }
 
         public string Destination { get; set; }
 

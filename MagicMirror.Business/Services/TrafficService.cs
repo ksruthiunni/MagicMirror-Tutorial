@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using MagicMirror.Business.Models;
+﻿using MagicMirror.Business.Models;
 using MagicMirror.DataAccess.Repos;
+using System.Threading.Tasks;
 
 namespace MagicMirror.Business.Services
 {

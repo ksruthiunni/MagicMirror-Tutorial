@@ -13,7 +13,6 @@ namespace MagicMirror.Tests.Weather
         private readonly Mock<IWeatherRepo> _mockRepo;
         private readonly Mock<WeatherService> _mockService;
 
-
         private const string Location = "London";
         private const float Kelvin = 290.6f;
         private const string Weathertype = "Clear";

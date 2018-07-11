@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace MagicMirror.Business.Services
 {
-    public class WeatherService : IWeatherService
+    public class WeatherService : Service<WeatherModel>, IWeatherService
     {
-        private IWeatherRepo _repo;
-        private IMapper _mapper;
-
+        private readonly IWeatherRepo _repo;
+        
         public WeatherService(IWeatherRepo repo)
         {
             _repo = repo;
@@ -28,23 +27,13 @@ namespace MagicMirror.Business.Services
             return model;
         }
 
-        public WeatherModel MapFromEntity(WeatherEntity entity)
-        {
-            var model = _mapper.Map<WeatherModel>(entity);
-            return model;
-        }
+        
 
-        public WeatherModel CalculateValues(WeatherModel model)
+        public WeatherModel ConvertValues(WeatherModel model)
         {
             return model.ConvertValues();
         }
 
-        protected void SetUpMapperConfiguration()
-        {
-            var baseMappings = new MapperConfigurationExpression();
-            baseMappings.AddProfile<AutoMapperConfiguration>();
-            var config = new MapperConfiguration(baseMappings);
-            _mapper = new Mapper(config);
-        }
+        
     }
 }

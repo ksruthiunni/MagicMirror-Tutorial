@@ -8,8 +8,6 @@ namespace MagicMirror.Business.Services
     {
         Task<WeatherModel> GetWeatherModel();
 
-        WeatherModel MapFromEntity(WeatherEntity entity);
-
-        WeatherModel CalculateValues(WeatherModel model);
+        WeatherModel ConvertValues(WeatherModel model);
     }
 }

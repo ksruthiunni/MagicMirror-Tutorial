@@ -3,7 +3,7 @@ using Acme.Generic.Helpers;
 
 namespace MagicMirror.Business.Models
 {
-    public class WeatherModel
+    public class WeatherModel : Model
     {
         public string Location { get; set; }
 
@@ -21,7 +21,7 @@ namespace MagicMirror.Business.Models
 
         public WeatherModel ConvertValues()
         {
-            ConvertTemperature(Temperature, TemperatureUom.Celsius);
+            ConvertTemperature(Temperature);
             ConvertDates();
 
             return this;
@@ -35,11 +35,11 @@ namespace MagicMirror.Business.Models
             Sunrise = DateHelper.ConvertFromUnixTimestamp(sunrise).ToShortTimeString();
         }
 
-        private void ConvertTemperature(double degrees, TemperatureUom uom)
+        private void ConvertTemperature(double degrees)
         {
             double convertedDegrees = -1;
 
-            switch (uom)
+            switch (TemperatureUom)
             {
                 case TemperatureUom.Celsius:
                     convertedDegrees = TemperatureHelper.KelvinToCelsius(degrees);
@@ -50,10 +50,11 @@ namespace MagicMirror.Business.Models
                     break;
 
                 case TemperatureUom.Kelvin:
+                    convertedDegrees = degrees;
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(uom), uom, null);
+                    throw new ArgumentOutOfRangeException(nameof(TemperatureUom), TemperatureUom, null);
             }
 
             Temperature = convertedDegrees;

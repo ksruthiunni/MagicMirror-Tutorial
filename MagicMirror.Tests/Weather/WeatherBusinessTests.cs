@@ -9,21 +9,24 @@ namespace MagicMirror.Tests.Weather
 {
     public class WeatherBusinessTests
     {
-        private readonly Mock<WeatherService> _mockService;
         private readonly Mock<WeatherEntity> _mockEntity;
+        private readonly Mock<IWeatherRepo> _mockRepo;
+        private readonly Mock<WeatherService> _mockService;
+
 
         private const string Location = "London";
-        private const float Kelvin = 280.4f;
-        private const string Weathertype = "Cloudy";
-        private const int Sunrise = 1531194962;
-        private const int Sunset = 1531253720;
+        private const float Kelvin = 290.6f;
+        private const string Weathertype = "Clear";
+        private const string Icon = "01d";
+        private const int Sunrise = 1531281435;
+        private const int Sunset = 1531340063;
 
         public WeatherBusinessTests()
         {
             _mockEntity = new Mock<WeatherEntity>();
 
-            var mockRepo = new Mock<IWeatherRepo>();
-            _mockService = new Mock<WeatherService>(mockRepo.Object);
+            _mockRepo = new Mock<IWeatherRepo>();
+            _mockService = new Mock<WeatherService>(_mockRepo.Object);
         }
 
         [Fact]
@@ -32,6 +35,8 @@ namespace MagicMirror.Tests.Weather
             // Arrange
             _mockEntity.Setup(x => x.Name).Returns(Location);
             _mockEntity.Setup(x => x.Main.Temp).Returns(Kelvin);
+            _mockEntity.Setup(x => x.Sys.Sunrise).Returns(Sunrise);
+            _mockEntity.Setup(x => x.Sys.Sunset).Returns(Sunset);
 
             _mockEntity.Setup(x => x.Weather).Returns(() => new[]
             {
@@ -39,12 +44,6 @@ namespace MagicMirror.Tests.Weather
                 {
                     Main = Weathertype
                 }
-            });
-
-            _mockEntity.Setup(x => x.Sys).Returns(new Sys
-            {
-                Sunrise = Sunrise,
-                Sunset = Sunset
             });
 
             // Act
@@ -64,17 +63,17 @@ namespace MagicMirror.Tests.Weather
             // Arrange
             var model = new WeatherModel()
             {
-                Sunrise = "1531281435",
-                Sunset = "1531340063",
-                Temperature = 290.6,
-                Location = "London",
+                Sunrise = Sunrise.ToString(),
+                Sunset = Sunset.ToString(),
+                Temperature = Kelvin,
+                Location = Location,
                 TemperatureUom = TemperatureUom.Celsius,
-                WeatherType = "Clear",
-                Icon = "01d"
+                WeatherType = Weathertype,
+                Icon = Icon
             };
 
             // Act
-            _mockService.Object.CalculateValues(model);
+            _mockService.Object.ConvertValues(model);
 
             // Assert
             Assert.Equal(17.45, model.Temperature);

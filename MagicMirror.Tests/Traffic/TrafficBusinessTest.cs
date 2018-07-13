@@ -10,7 +10,7 @@ using Xunit;
 
 namespace MagicMirror.Tests.Traffic
 {
-    public class TrafficBusinessTest
+    public class TrafficBusinessTests
     {
         private ITrafficService _service;
         private TrafficModel _model;
@@ -20,7 +20,7 @@ namespace MagicMirror.Tests.Traffic
         private const string origin = "London, Uk";
         private const string destination = "Leeds, Uk";
 
-        public TrafficBusinessTest()
+        public TrafficBusinessTests()
         {
             var mockRepo = new Mock<ITrafficRepo>();
             _service = new TrafficService(mockRepo.Object);

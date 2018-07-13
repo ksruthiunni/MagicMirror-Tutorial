@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicMirror.Tests", "MagicM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MagicMirror.Business", "MagicMirror.Business\MagicMirror.Business.csproj", "{B6956124-1021-4532-8AE2-20497F126D86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Generic", "Acme.Generic\Acme.Generic.csproj", "{04332B91-68DA-4D68-BD2D-D87F28826D9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acme.Generic", "Acme.Generic\Acme.Generic.csproj", "{04332B91-68DA-4D68-BD2D-D87F28826D9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Generic.Tests", "Acme.Generic.Tests\Acme.Generic.Tests.csproj", "{B05D6A91-4282-4D2F-9560-C34E7ABEACE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{04332B91-68DA-4D68-BD2D-D87F28826D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04332B91-68DA-4D68-BD2D-D87F28826D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04332B91-68DA-4D68-BD2D-D87F28826D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B05D6A91-4282-4D2F-9560-C34E7ABEACE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B05D6A91-4282-4D2F-9560-C34E7ABEACE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B05D6A91-4282-4D2F-9560-C34E7ABEACE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B05D6A91-4282-4D2F-9560-C34E7ABEACE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

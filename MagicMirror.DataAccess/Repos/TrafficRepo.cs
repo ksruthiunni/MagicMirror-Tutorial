@@ -27,14 +27,14 @@ namespace MagicMirror.DataAccess.Repos
 
         private void FillInputData(string start, string destination)
         {
-            _apiId = DataAccessConfig.TrafficApiId;
-            _apiUrl = DataAccessConfig.TrafficApiUrl;
+            ApiId = DataAccessConfig.TrafficApiId;
+            ApiUrl = DataAccessConfig.TrafficApiUrl;
             _start = start;
             _destination = destination;
 
             ValidateInput();
 
-            _url = $"{_apiUrl}?origins={start}&destinations={destination}&key={_apiId}";
+            Url = $"{ApiUrl}?origins={start}&destinations={destination}&key={ApiId}";
         }
 
         protected override void ValidateInput()

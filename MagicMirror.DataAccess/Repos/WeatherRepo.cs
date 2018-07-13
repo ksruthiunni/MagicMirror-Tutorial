@@ -21,13 +21,13 @@ namespace MagicMirror.DataAccess.Repos
 
         private void FillInputData(string city)
         {
-            _apiId = DataAccessConfig.OpenWeatherMapApiId;
-            _apiUrl = DataAccessConfig.OpenWeatherMapApiUrl;
+            ApiId = DataAccessConfig.OpenWeatherMapApiId;
+            ApiUrl = DataAccessConfig.OpenWeatherMapApiUrl;
             _city = city;
 
             ValidateInput();
 
-            _url = $"{_apiUrl}/weather?q={_city}&appId={_apiId}";
+            Url = $"{ApiUrl}/weather?q={_city}&appId={ApiId}";
         }
 
         protected override void ValidateInput()

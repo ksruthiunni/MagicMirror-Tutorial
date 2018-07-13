@@ -9,7 +9,7 @@ namespace MagicMirror.Tests.Weather
 {
     public class WeatherDataTests
     {
-        private IWeatherRepo _repo;
+        private readonly IWeatherRepo _repo;
 
         public WeatherDataTests()
         {

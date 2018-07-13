@@ -57,7 +57,7 @@ namespace MagicMirror.ConsoleApp
                 Sunset = "18:36",
                 Temperature = 17,
                 WeatherType = "Sunny",
-                TemperatureUOM = "Celsius",
+                TemperatureUom = "Celsius",
             };
         }
 
@@ -67,7 +67,7 @@ namespace MagicMirror.ConsoleApp
             {
                 Minutes = 35,
                 Distance = 27,
-                DistanceUOM = "Kilometers",
+                DistanceUom = "Kilometers",
                 Destination = "2 St Margaret St, London"
             };
         }
@@ -76,7 +76,7 @@ namespace MagicMirror.ConsoleApp
         {
             Console.WriteLine($"Good {GetTimeOfDay()} {_userInformation.Name}");
             Console.WriteLine($"The current time is {DateTime.Now.ToShortTimeString()} and the outside weather is {_weatherInformation.WeatherType}.");
-            Console.WriteLine($"Current topside temperature is {_weatherInformation.Temperature} degrees {_weatherInformation.TemperatureUOM}.");
+            Console.WriteLine($"Current topside temperature is {_weatherInformation.Temperature} degrees {_weatherInformation.TemperatureUom}.");
             Console.WriteLine($"The sun has risen at {_weatherInformation.Sunrise} and will set at approximately {_weatherInformation.Sunset}.");
             Console.WriteLine($"Your trip to work will take about {_trafficInformation.Minutes} minutes. " +
                 $"If you leave now, you should arrive at approximately {_trafficInformation.TimeOfArrival.ToShortTimeString()}.");

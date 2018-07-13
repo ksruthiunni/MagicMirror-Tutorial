@@ -9,7 +9,7 @@ namespace MagicMirror.Tests.Traffic
 {
     public class TrafficDataTests
     {
-        private ITrafficRepo _repo;
+        private readonly ITrafficRepo _repo;
 
         public TrafficDataTests()
         {

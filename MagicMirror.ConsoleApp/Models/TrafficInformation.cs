@@ -8,7 +8,7 @@ namespace MagicMirror.ConsoleApp.Models
 
         public double Distance { get; set; }
 
-        public string DistanceUOM { get; set; }
+        public string DistanceUom { get; set; }
 
         public int Minutes { get; set; }
 

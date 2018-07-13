@@ -6,7 +6,7 @@
 
         public double Temperature { get; set; }
 
-        public string TemperatureUOM { get; set; }
+        public string TemperatureUom { get; set; }
 
         public string WeatherType { get; set; }
 

@@ -12,9 +12,10 @@ namespace MagicMirror.Tests.Weather
     public class WeatherBusinessTests
     {
         private readonly IWeatherService _service;
+        private WeatherModel _model;
 
         private const string Location = "London";
-        private const float Kelvin = 290.6f;
+        private const double Kelvin = 295.15;
         private const string Weathertype = "Clear";
         private const string Icon = "01d";
         private const int Sunrise = 1531281435;
@@ -45,38 +46,69 @@ namespace MagicMirror.Tests.Weather
             });
 
             // Act
-            var model = _service.MapFromEntity(mockEntity.Object);
+            _model = _service.MapFromEntity(mockEntity.Object);
 
             // Assert
-            Assert.Equal(Location, model.Location);
-            Assert.Equal(Weathertype, model.WeatherType);
-            Assert.Equal(Kelvin, model.Temperature);
-            Assert.Equal(Sunrise.ToString(), model.Sunrise);
-            Assert.Equal(Sunset.ToString(), model.Sunset);
+            Assert.Equal(Location, _model.Location);
+            Assert.Equal(Weathertype, _model.WeatherType);
+            Assert.Equal(Kelvin, _model.Temperature);
+            Assert.Equal(Sunrise.ToString(), _model.Sunrise);
+            Assert.Equal(Sunset.ToString(), _model.Sunset);
         }
 
         [Fact]
-        public void Can_Calculate_Values()
+        public void Can_Calculate_SunRise_SunSet()
         {
             // Arrange
-            var model = new WeatherModel()
+            SetUpTestData();
+
+            // Act
+            _model.ConvertValues();
+
+            // Assert
+            Assert.Equal("03:57", _model.Sunrise);
+            Assert.Equal("20:14", _model.Sunset);
+        }
+
+        [Fact]
+        public void Can_Convert_kelvin_To_Celsius()
+        {
+            // Arrange
+            SetUpTestData();
+            _model.TemperatureUom = TemperatureUom.Celsius;
+
+            // Act
+            _model.ConvertValues();
+
+            // Assert
+            Assert.Equal(22, _model.Temperature);
+        }
+
+        [Fact]
+        public void Can_Convert_kelvin_To_Fahrenheit()
+        {
+            // Arrange
+            SetUpTestData();
+            _model.TemperatureUom = TemperatureUom.Fahrenheit;
+
+            // Act
+            _model.ConvertValues();
+
+            // Assert
+            Assert.Equal(71.87, _model.Temperature);
+        }
+
+        private void SetUpTestData()
+        {
+            _model = new WeatherModel
             {
                 Sunrise = Sunrise.ToString(),
                 Sunset = Sunset.ToString(),
                 Temperature = Kelvin,
                 Location = Location,
-                TemperatureUom = TemperatureUom.Celsius,
                 WeatherType = Weathertype,
                 Icon = Icon
             };
-
-            // Act
-            model.ConvertValues();
-
-            // Assert
-            Assert.Equal(17.45, model.Temperature);
-            Assert.Equal("03:57", model.Sunrise);
-            Assert.Equal("20:14", model.Sunset);
         }
     }
 }

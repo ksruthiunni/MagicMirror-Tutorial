@@ -45,7 +45,7 @@ namespace MagicMirror.Business.Models
                     break;
 
                 case TemperatureUom.Fahrenheit:
-                    convertedDegrees = TemperatureHelper.KelvinToCelsius(degrees);
+                    convertedDegrees = TemperatureHelper.KelvinToFahrenheit(degrees);
                     break;
 
                 case TemperatureUom.Kelvin:

@@ -12,7 +12,7 @@ namespace Acme.Generic.Helpers
 
         public static double KelvinToFahrenheit(double degK, int precision = 2)
         {
-            double result = 1.8 * (degK - 273) + 32;
+            double result = 9.0f / 5.0f * (degK - 273) + 32;
             return Math.Round(result, precision);
         }
 

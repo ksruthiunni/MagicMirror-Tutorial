@@ -2,10 +2,10 @@
 {
     public class Main
     {
-        public virtual float Temp { get; set; }
+        public virtual double Temp { get; set; }
         public int Pressure { get; set; }
         public int Humidity { get; set; }
-        public float Temp_min { get; set; }
-        public float Temp_max { get; set; }
+        public double Temp_min { get; set; }
+        public double Temp_max { get; set; }
     }
 }

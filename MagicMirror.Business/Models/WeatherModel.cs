@@ -51,7 +51,6 @@ namespace MagicMirror.Business.Models
                 case TemperatureUom.Kelvin:
                     convertedDegrees = degrees;
                     break;
-
                 default:
                     throw new ArgumentOutOfRangeException(nameof(TemperatureUom), TemperatureUom, null);
             }

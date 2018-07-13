@@ -1,10 +1,11 @@
 ﻿using MagicMirror.Business.Models;
 using MagicMirror.DataAccess.Repos;
 using System.Threading.Tasks;
+using MagicMirror.Business.Services.Contracts;
 
 namespace MagicMirror.Business.Services
 {
-    public class TrafficService : Service<TrafficModel>
+    public class TrafficService : Service<TrafficModel>, ITrafficService
     {
         private readonly ITrafficRepo _repo;
 

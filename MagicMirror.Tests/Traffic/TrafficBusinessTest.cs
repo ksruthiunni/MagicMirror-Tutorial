@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MagicMirror.Business.Enums;
+using MagicMirror.Business.Models;
 using MagicMirror.Business.Services;
-using MagicMirror.DataAccess.Entities.Traffic;
+using MagicMirror.Business.Services.Contracts;
 using MagicMirror.DataAccess.Repos;
 using Xunit;
 using Moq;
@@ -11,32 +10,55 @@ namespace MagicMirror.Tests.Traffic
 {
     public class TrafficBusinessTest
     {
-        private readonly Mock<ITrafficRepo> _mockRepo;
-        private readonly TrafficService _service;
+        private ITrafficService _service;
+        private TrafficModel _model;
 
-        private readonly int distance = 72;
-        private readonly int duration = 108;
+        private const int Duration = 42;
+        private const int Distance = 76;
 
         public TrafficBusinessTest()
         {
-            _mockRepo = new Mock<ITrafficRepo>();
-            _service = new TrafficService(_mockRepo.Object);
+            var mockRepo = new Mock<ITrafficRepo>();
+            _service = new TrafficService(mockRepo.Object);
+
+            SetUpTestData();
+        }
+
+        private void SetUpTestData()
+        {
+            _model = new TrafficModel
+            {
+                Distance = Distance,
+                Duration = Duration,
+            };
         }
 
         [Fact]
-        public void Can_Map_From_Entity()
+        public void Can_Correctly_Convert_Imperial_To_Metric()
         {
             // Arrange
-            var mockEntity = new Mock<MockTrafficEntity>();
-            mockEntity.Setup(x => x.Rows.Elements.Distance.Value).Returns(distance);
-            mockEntity.Setup(x => x.Rows.Elements.Duration.Value).Returns(duration);
+            _model.DistanceUom = DistanceUom.Metric;
 
             // Act
-            var model =_service.MapFromEntity(mockEntity.Object);
+            _model.ConvertValues();
 
             // Assert
-            Assert.Equal(distance, model.Distance);
-            Assert.Equal(duration, model.Duration);
+            Assert.Equal(122.31, _model.Distance);
+            Assert.Equal(Duration, _model.Duration);
+        }
+
+        [Fact]
+        public void Can_Correctly_Convert_Metric_To_Imperial()
+        {
+            // Arrange
+            _model.DistanceUom = DistanceUom.Imperial;
+
+            // Act
+            _model.ConvertValues();
+
+            // Assert
+            Assert.Equal(47.22, _model.Distance);
+            Assert.Equal(Duration, _model.Duration);
         }
     }
 }

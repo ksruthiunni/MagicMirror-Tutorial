@@ -1,4 +1,5 @@
 ﻿using System;
+using Acme.Generic.Helpers;
 using MagicMirror.Business.Enums;
 
 namespace MagicMirror.Business.Models
@@ -19,7 +20,17 @@ namespace MagicMirror.Business.Models
 
         public override void ConvertValues()
         {
-            throw new NotImplementedException();
+            switch (DistanceUom)
+            {
+                case DistanceUom.Imperial:
+                    Distance = DistanceHelper.KiloMetersToMiles(Distance);
+                    break;
+                case DistanceUom.Metric:
+                    Distance = DistanceHelper.MilesToKiloMeters(Distance);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(DistanceUom), DistanceUom, null);
+            }
         }
     }
 }

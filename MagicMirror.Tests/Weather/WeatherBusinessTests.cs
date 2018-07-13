@@ -1,6 +1,7 @@
 ﻿using MagicMirror.Business.Enums;
 using MagicMirror.Business.Models;
 using MagicMirror.Business.Services;
+using MagicMirror.Business.Services.Contracts;
 using MagicMirror.DataAccess.Entities.Weather;
 using MagicMirror.DataAccess.Repos;
 using Moq;
@@ -10,26 +11,24 @@ namespace MagicMirror.Tests.Weather
 {
     public class WeatherBusinessTests
     {
-        private Mock<IWeatherRepo> _mockRepo;
-        private Mock<WeatherService> _mockService;
+        private readonly IWeatherService _service;
 
-        private string Location = "London";
-        private float Kelvin = 290.6f;
-        private string Weathertype = "Clear";
-        private string Icon = "01d";
-        private int Sunrise = 1531281435;
-        private int Sunset = 1531340063;
+        private const string Location = "London";
+        private const float Kelvin = 290.6f;
+        private const string Weathertype = "Clear";
+        private const string Icon = "01d";
+        private const int Sunrise = 1531281435;
+        private const int Sunset = 1531340063;
 
         public WeatherBusinessTests()
         {
-            _mockRepo = new Mock<IWeatherRepo>();
-            _mockService = new Mock<WeatherService>(_mockRepo.Object);
+            var mockRepo = new Mock<IWeatherRepo>();
+            _service = new WeatherService(mockRepo.Object);
         }
 
         [Fact]
         public void Can_Map_From_Entity()
         {
-
             // Arrange
             var mockEntity = new Mock<WeatherEntity>();
             mockEntity.Setup(x => x.Name).Returns(Location);
@@ -46,7 +45,7 @@ namespace MagicMirror.Tests.Weather
             });
 
             // Act
-            var model = _mockService.Object.MapFromEntity(mockEntity.Object);
+            var model = _service.MapFromEntity(mockEntity.Object);
 
             // Assert
             Assert.Equal(Location, model.Location);

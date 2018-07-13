@@ -20,12 +20,11 @@ namespace MagicMirror.Tests.Traffic
         public async Task Can_Retrieve_Traffic_Data()
         {
             // Arrange
-            TrafficEntity entity = null;
             string start = "London, UK";
             string destination = "Brighton, UK";
 
             // Act
-            entity = await _repo.GetTrafficInfoAsync(start, destination);
+            var entity = await _repo.GetTrafficInfoAsync(start, destination);
 
             // Assert
             Assert.NotNull(entity);
@@ -54,7 +53,7 @@ namespace MagicMirror.Tests.Traffic
             string destination = "Brighton, UK";
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<ArgumentNullException>
+            await Assert.ThrowsAsync<ArgumentNullException>
                 (async () => await _repo.GetTrafficInfoAsync(start, destination));
         }
 
@@ -66,7 +65,7 @@ namespace MagicMirror.Tests.Traffic
             string destination = "FOOBAR";
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<HttpRequestException>
+            await Assert.ThrowsAsync<HttpRequestException>
                 (async () => await _repo.GetTrafficInfoAsync(start, destination));
         }
     }

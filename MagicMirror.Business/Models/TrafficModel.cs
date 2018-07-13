@@ -21,10 +21,10 @@ namespace MagicMirror.Business.Models
         public override void ConvertValues()
         {
             Distance = ConvertDistance(Distance, DistanceUom);
-            TimeOfArrival = CalculatTimeOfArrival(Duration);
+            TimeOfArrival = CalculateTimeOfArrival(Duration);
         }
 
-        private DateTime CalculatTimeOfArrival(int duration)
+        private DateTime CalculateTimeOfArrival(int duration)
         {
             return DateTime.Now.AddMinutes(duration);
         }

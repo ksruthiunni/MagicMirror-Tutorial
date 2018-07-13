@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MagicMirror.Business.Models;
+using MagicMirror.DataAccess.Entities.Entities;
 using MagicMirror.DataAccess.Entities.Traffic;
 using MagicMirror.DataAccess.Entities.Weather;
 
@@ -21,6 +22,9 @@ namespace MagicMirror.Business.Configuration
                 .ForMember(x => x.Origin, y => y.MapFrom(z => z.Origin_addresses[0]))
                 .ForMember(x => x.Distance, y => y.MapFrom(z => z.Rows[0].Elements[0].Distance.Value))
                 .ForMember(x => x.Duration, y => y.MapFrom(z => z.Rows[0].Elements[0].Duration.Value));
+
+
+            CreateMap<UserEntity, UserInformation>();
         }
     }
 }

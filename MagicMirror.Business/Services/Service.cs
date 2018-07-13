@@ -8,7 +8,6 @@ using MagicMirror.DataAccess.Entities.Entities;
 namespace MagicMirror.Business.Services
 {
     public abstract class Service<T> : IService<T>
-        where T : Model
     {
         protected IMapper Mapper;
 

@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using MagicMirror.Business.Models;
+﻿using MagicMirror.Business.Models;
+using System.Threading.Tasks;
 
 namespace MagicMirror.Business.Services.Contracts
 {
-    public interface IWeatherService: IService<WeatherModel>
+    public interface IWeatherService : IService<WeatherModel>
     {
         Task<WeatherModel> GetWeatherModel(string city);
     }

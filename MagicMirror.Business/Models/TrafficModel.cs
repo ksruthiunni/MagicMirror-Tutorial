@@ -38,9 +38,11 @@ namespace MagicMirror.Business.Models
                 case DistanceUom.Imperial:
                     convertedDistance = DistanceHelper.KiloMetersToMiles(Distance);
                     break;
+
                 case DistanceUom.Metric:
                     convertedDistance = DistanceHelper.MilesToKiloMeters(Distance);
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(DistanceUom), DistanceUom, null);
             }

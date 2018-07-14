@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.Configuration;
 using MagicMirror.Business.Configuration;
-using MagicMirror.Business.Models;
-using MagicMirror.Business.Services.Contracts;
 using MagicMirror.DataAccess.Entities.Entities;
 
 namespace MagicMirror.Business.Services

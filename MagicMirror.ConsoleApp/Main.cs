@@ -1,22 +1,45 @@
-﻿using MagicMirror.ConsoleApp.Models;
+﻿using MagicMirror.Business.Models;
+using MagicMirror.Business.Services;
+using MagicMirror.ConsoleApp.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace MagicMirror.ConsoleApp
 {
-    public class Main
+    public class Main : IMain
     {
+        private IWeatherService _weatherService;
+        private ITrafficService _trafficService;
+
         private UserInformation _userInformation;
-        private WeatherInformation _weatherInformation;
-        private TrafficInformation _trafficInformation;
+        private WeatherModel _weatherModel;
+        private TrafficModel _trafficModel;
 
-        public void Run()
+        public Main(IWeatherService weatherService, ITrafficService trafficService)
         {
-            _userInformation = GetInformation();
-            _weatherInformation = GetOfflineWeatherData();
-            _trafficInformation = GetOfflineTrafficData();
+            _weatherService = weatherService;
+            _trafficService = trafficService;
+        }
 
-            GenerateOutput();
-            Console.ReadLine();
+        public async Task RunAsync()
+        {
+            try
+            {
+                _userInformation = GetInformation();
+                _weatherModel = await GetWeatherModelAsync(_userInformation.Town);
+                _trafficModel = await GetTrafficModelAsync($"{_userInformation.Address}, {_userInformation.Town}",
+                    _userInformation.WorkAddress);
+
+                GenerateOutput();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.ReadLine();
+            }
         }
 
         private UserInformation GetInformation()
@@ -30,7 +53,7 @@ namespace MagicMirror.ConsoleApp
             Console.WriteLine("Please enter your zipcode:");
             string zipcode = Console.ReadLine();
 
-            Console.WriteLine("Please enter your town:");
+            Console.WriteLine("Please enter your town and country:");
             string town = Console.ReadLine();
 
             Console.WriteLine("Please enter your work address:");
@@ -48,38 +71,26 @@ namespace MagicMirror.ConsoleApp
             return result;
         }
 
-        private WeatherInformation GetOfflineWeatherData()
+        private async Task<WeatherModel> GetWeatherModelAsync(string city)
         {
-            return new WeatherInformation
-            {
-                Location = "London",
-                Sunrise = "6:04",
-                Sunset = "18:36",
-                Temperature = 17,
-                WeatherType = "Sunny",
-                TemperatureUom = "Celsius",
-            };
+            _weatherModel = await _weatherService.GetWeatherModel(city);
+            return _weatherModel;
         }
 
-        private TrafficInformation GetOfflineTrafficData()
+        private async Task<TrafficModel> GetTrafficModelAsync(string start, string destination)
         {
-            return new TrafficInformation
-            {
-                Minutes = 35,
-                Distance = 27,
-                DistanceUom = "Kilometers",
-                Destination = "2 St Margaret St, London"
-            };
+            _trafficModel = await _trafficService.GetTrafficModel(start , destination);
+            return _trafficModel;
         }
 
         private void GenerateOutput()
         {
             Console.WriteLine($"Good {GetTimeOfDay()} {_userInformation.Name}");
-            Console.WriteLine($"The current time is {DateTime.Now.ToShortTimeString()} and the outside weather is {_weatherInformation.WeatherType}.");
-            Console.WriteLine($"Current topside temperature is {_weatherInformation.Temperature} degrees {_weatherInformation.TemperatureUom}.");
-            Console.WriteLine($"The sun has risen at {_weatherInformation.Sunrise} and will set at approximately {_weatherInformation.Sunset}.");
-            Console.WriteLine($"Your trip to work will take about {_trafficInformation.Minutes} minutes. " +
-                $"If you leave now, you should arrive at approximately {_trafficInformation.TimeOfArrival.ToShortTimeString()}.");
+            Console.WriteLine($"The current time is {DateTime.Now.ToShortTimeString()} and the outside weather is {_weatherModel.WeatherType}.");
+            Console.WriteLine($"Current topside temperature is {_weatherModel.Temperature} degrees {_weatherModel.TemperatureUom}.");
+            Console.WriteLine($"The sun has risen at {_weatherModel.Sunrise} and will set at approximately {_weatherModel.Sunset}.");
+            Console.WriteLine($"Your trip to work will take about {_trafficModel.Minutes} minutes. " +
+                $"If you leave now, you should arrive at approximately {_trafficModel.TimeOfArrival.ToShortTimeString()}.");
             Console.WriteLine("Thank you, and have a very safe and productive day!");
         }
 

@@ -1,7 +1,6 @@
 ﻿using MagicMirror.Business.Enums;
 using MagicMirror.Business.Models;
 using MagicMirror.Business.Services;
-using MagicMirror.Business.Services.Contracts;
 using MagicMirror.DataAccess.Entities.Weather;
 using MagicMirror.DataAccess.Repos;
 using Moq;

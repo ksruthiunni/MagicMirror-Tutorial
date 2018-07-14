@@ -1,21 +1,21 @@
 ﻿using MagicMirror.Business.Services;
+using MagicMirror.DataAccess.Repos;
 using Microsoft.Extensions.DependencyInjection;
-using System.ComponentModel;
 
 namespace MagicMirror.ConsoleApp
 {
-    internal class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
-            // Create service collection
+            // create service collection
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
 
-            // Create service provider
+            // create service provider
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            // Entry to run app
+            // entry to run app
             serviceProvider.GetService<Main>().RunAsync().GetAwaiter().GetResult();
         }
 
@@ -23,7 +23,9 @@ namespace MagicMirror.ConsoleApp
         {
             // add services
             serviceCollection.AddTransient<ITrafficService, TrafficService>();
+            serviceCollection.AddTransient<ITrafficRepo, TrafficRepo>();
             serviceCollection.AddTransient<IWeatherService, WeatherService>();
+            serviceCollection.AddTransient<IWeatherRepo, WeatherRepo>();
 
             // add app
             serviceCollection.AddTransient<Main>();

@@ -27,8 +27,7 @@ namespace MagicMirror.ConsoleApp
             {
                 _userInformation = GetInformation();
                 _weatherModel = await GetWeatherModelAsync(_userInformation.Town);
-                _trafficModel = await GetTrafficModelAsync($"{_userInformation.Address}, {_userInformation.Town}",
-                    _userInformation.WorkAddress);
+                _trafficModel = await GetTrafficModelAsync($"{_userInformation.Address}, {_userInformation.Town}", _userInformation.WorkAddress);
 
                 GenerateOutput();
             }
@@ -79,7 +78,7 @@ namespace MagicMirror.ConsoleApp
 
         private async Task<TrafficModel> GetTrafficModelAsync(string start, string destination)
         {
-            _trafficModel = await _trafficService.GetTrafficModel(start , destination);
+            _trafficModel = await _trafficService.GetTrafficModel(start, destination);
             return _trafficModel;
         }
 
@@ -89,7 +88,7 @@ namespace MagicMirror.ConsoleApp
             Console.WriteLine($"The current time is {DateTime.Now.ToShortTimeString()} and the outside weather is {_weatherModel.WeatherType}.");
             Console.WriteLine($"Current topside temperature is {_weatherModel.Temperature} degrees {_weatherModel.TemperatureUom}.");
             Console.WriteLine($"The sun has risen at {_weatherModel.Sunrise} and will set at approximately {_weatherModel.Sunset}.");
-            Console.WriteLine($"Your trip to work will take about {_trafficModel.Minutes} minutes. " +
+            Console.WriteLine($"Your trip to work will take about {_trafficModel.Duration} minutes. " +
                 $"If you leave now, you should arrive at approximately {_trafficModel.TimeOfArrival.ToShortTimeString()}.");
             Console.WriteLine("Thank you, and have a very safe and productive day!");
         }

@@ -8,26 +8,26 @@ namespace MagicMirror.ConsoleApp
     {
         public static void Main(string[] args)
         {
-            // create service collection
+            // Create service collection
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
 
-            // create service provider
+            // Create service provider
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            // entry to run app
+            // Entry to run app
             serviceProvider.GetService<Main>().RunAsync().GetAwaiter().GetResult();
         }
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            // add services
+            // Add Services
             serviceCollection.AddTransient<ITrafficService, TrafficService>();
             serviceCollection.AddTransient<ITrafficRepo, TrafficRepo>();
             serviceCollection.AddTransient<IWeatherService, WeatherService>();
             serviceCollection.AddTransient<IWeatherRepo, WeatherRepo>();
 
-            // add app
+            // Add app
             serviceCollection.AddTransient<Main>();
         }
     }
